@@ -1,0 +1,15 @@
+; Synthetic public placeholder. No private project dependencies.
+config_version=5
+[application]
+config/name="GenericGodotIOS"
+config/features=PackedStringArray("4.7", "Mobile")
+run/main_scene="res://main.tscn"
+run/max_fps=60
+[display]
+window/size/viewport_width=720
+window/size/viewport_height=1280
+window/stretch/mode="canvas_items"
+window/handheld/orientation=1
+[rendering]
+renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
