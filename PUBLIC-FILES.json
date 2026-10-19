@@ -3,8 +3,9 @@
   "LICENSE": "9c6d3c23abe7d05037b8cec88e0ba06f645ad9cd610e0ea15f586ab362e55690",
   "README.md": "f373c1c59fa459e5f1aaa2179e22165e4ee1fbe73bace57257fe2aa621497f50",
   "RELEASE-NOTES.md": "12d24bf9f25a706f766677dce8f3fd595b234d7aa6dbcbd890c84ba740bb5ebf",
-  "ci/build_generic.py": "31fc33e415150467ce64deaa744b633aa8d9e3bac7fa373206b8413823ce277c",
-  "shell/export_presets.cfg": "b606f813c5f98f1b784352552f2c8b92faeb806e56c2af19cae1b00cbe6f9246",
+  "ci/build_generic.py": "17eb253e8ad8b1db5c9cb5a95e49587801ad87fc14782f30723a10d861f4d44a",
+  "shell/export_presets.cfg": "6ad80d2e9e20326ce3bf522886e773eeaf0a1e037ec750a6242b333686bc7e1b",
+  "shell/ios-icon-1024.png": "6ca3216bf4b34586a42e76c67ede6c119ba24566b47d8db7a91753d12925f40e",
   "shell/main.gd": "35ce1807727510cc50df2a5af5e85098f937853197ac7a0724799e7ef5bcec77",
   "shell/main.tscn": "4ec625ab2e33d872ce378c1826f3c59bbe9d9b6491db53b27decce79170a0e63",
   "shell/project.godot": "d60cad4044f50af67eac0ebfbf9e7cce1d248e8dc48a026e43a076670206d198"

@@ -18,6 +18,7 @@ SPIRV_CROSS_COMMIT = 'adec7acbf41a988713cdb85f93f26c8ca5ea863e'
 EXPECTED_FILES = {
     '.github/workflows/build-ios.yml', 'ci/build_generic.py',
     'shell/project.godot', 'shell/main.gd', 'shell/main.tscn', 'shell/export_presets.cfg',
+    'shell/ios-icon-1024.png',
     'README.md', 'LICENSE', 'RELEASE-NOTES.md', 'PUBLIC-FILES.json',
 }
 
