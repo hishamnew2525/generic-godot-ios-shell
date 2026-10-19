@@ -1,0 +1,66 @@
+# DRAFT ONLY: not authorised for upload or execution.
+name: Generic unsigned iOS shell
+'on':
+  workflow_dispatch:
+    inputs:
+      publish_generic_release:
+        description: Separate approval to publish this generic binary publicly
+        required: true
+        default: 'NO'
+        type: choice
+        options:
+          - 'NO'
+          - 'APPROVED_PUBLIC_GENERIC_ONLY'
+permissions:
+  contents: read
+concurrency:
+  group: generic-ios-public-build
+  cancel-in-progress: false
+jobs:
+  build-and-release:
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      github.event.repository.visibility == 'public' &&
+      github.event.repository.fork == false &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      inputs.publish_generic_release == 'APPROVED_PUBLIC_GENERIC_ONLY'
+    runs-on: macos-26
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+      PUBLIC_REPOSITORY_VISIBILITY: ${{ github.event.repository.visibility }}
+    steps:
+      - name: Check out only this public fixture
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          lfs: false
+          submodules: false
+      - name: Verify inventory and build unsigned synthetic app
+        run: python3 ci/build_generic.py
+      - name: Publish allowlisted generic outputs to Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_RUN_ATTEMPT" = 1
+          test "$PUBLIC_REPOSITORY_VISIBILITY" = public
+          test -f release/GenericGodotIOS-unsigned.zip
+          test -f release/BUILD-INFO.json
+          test -f release/SHA256SUMS
+          release_tag="generic-ios-${GITHUB_RUN_ID}"
+          gh release create "$release_tag" \
+            release/GenericGodotIOS-unsigned.zip \
+            release/BUILD-INFO.json \
+            release/SHA256SUMS \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "Generic unsigned iOS shell" \
+            --notes-file RELEASE-NOTES.md \
+            --prerelease \
+            --latest=false
